@@ -14,10 +14,11 @@ router.post('/homeworks', async (req, res) => {
             due_date,
         })
 
-        const createdHomework = await Homework.save();
+        const createdHomework = await homework.save();
 
         res.status(201).json(createdHomework)
     } catch (err) {
+        console.log(err)
         res.status(500).json({ error: 'Database creation failed'})
     }
 })
