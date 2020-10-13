@@ -1,3 +1,6 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 import express from 'express'
 import mongoose from 'mongoose'
 import morgan from 'morgan'
@@ -6,7 +9,7 @@ import router from './router.js'
 const app = express()
 
 // Connect to DB
-mongoose.connect('mongodb+srv://admin:admin@cluster0.gio0q.mongodb.net/latihan?retryWrites=true&w=majority',
+mongoose.connect(process.env.MONGODB_URI,
     {useNewUrlParser: true, useUnifiedTopology: true,}
 ).then(() => {
     console.log('Connect to DB success')
@@ -27,6 +30,6 @@ app.get('/', (req, res) => {
 
 app.use('/api', router)
 
-app.listen('3000', () => {
-    console.log('App listens to port 3000')
+app.listen(`${process.env.PORT}`, () => {
+    console.log(`App listens to port ${process.env.PORT}`)
 })
