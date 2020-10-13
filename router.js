@@ -93,5 +93,21 @@ router.delete('/homeworks/:id', async (req, res) => {
     }
 })
 
+//@desc Delete all homeworks
+//@route DELETE /api/homeworks/:id
+router.delete('/homeworks', async (req, res) => {
+    const homework = await Homework.deleteMany()
+
+    if (homework) {
+        res.json({
+            message : 'Success deleted all homeworks'
+        })
+    } else {
+        res.status(404).json({
+            message : 'Failed to delete homeworks'
+        })
+    }
+})
+
 
 export default router;

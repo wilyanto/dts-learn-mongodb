@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGODB_URI,
 ).then(() => {
     console.log('Connect to DB success')
 }).catch(err => {
-    console.log('Connect to failed ' + err)
+    console.log('Connect to DB failed: ' + err)
 })
 
 // Middleware
