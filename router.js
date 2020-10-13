@@ -30,7 +30,7 @@ router.post('/homeworks', async (req, res) => {
 router.get('/homeworks', async (req, res) => {
     const homeworks = await Homework.find({})
 
-    if (homeworks) {
+    if (homeworks.length > 0) {
         res.json(homeworks)
     } else {
         res.status(404).json({
@@ -40,7 +40,7 @@ router.get('/homeworks', async (req, res) => {
 })
 
 //@desc Get certain homework
-//@route GET /api/homeworks
+//@route GET /api/homeworks/:id
 router.get('/homeworks/:id', async (req, res) => {
     const homeworks = await Homework.findById(req.params.id)
 
@@ -53,6 +53,8 @@ router.get('/homeworks/:id', async (req, res) => {
     }
 })
 
+//@desc PUT certain homework
+//@route PUT /api/homeworks/:id
 router.put('/homeworks/:id', async (req, res) => {
     const { course, title, due_date, status} = req.body
 
@@ -73,5 +75,23 @@ router.put('/homeworks/:id', async (req, res) => {
         })
     }
 })
+
+//@desc Delete certain homework
+//@route DELETE /api/homeworks/:id
+router.delete('/homeworks/:id', async (req, res) => {
+    const homework = await Homework.findById(req.params.id)
+
+    if (homework) {
+        await homework.remove()
+        res.json({
+            message : 'Data removed'
+        })
+    } else {
+        res.status(200).json({
+            message : 'Homework not found'
+        })
+    }
+})
+
 
 export default router;
