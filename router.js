@@ -94,7 +94,7 @@ router.delete('/homeworks/:id', async (req, res) => {
 })
 
 //@desc Delete all homeworks
-//@route DELETE /api/homeworks/:id
+//@route DELETE /api/homeworks/
 router.delete('/homeworks', async (req, res) => {
     const homework = await Homework.deleteMany()
 
